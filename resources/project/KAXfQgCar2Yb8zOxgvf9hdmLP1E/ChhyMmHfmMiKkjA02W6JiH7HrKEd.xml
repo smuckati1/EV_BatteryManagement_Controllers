@@ -1,2 +1,2 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<Info Type="Basic" GroupUUID="aa4b57e0-c910-44ed-a8c8-3e5ad81273b8" Visible="1" Icon="" File="03 - VCU Models/Tests/EV2M_VCU_MiLtests.mldatx" Name="02 - VCU Tests"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<Info File="03_VCU Models/Tests/EV2M_VCU_MiLtests.mldatx" GroupUUID="aa4b57e0-c910-44ed-a8c8-3e5ad81273b8" Icon="" Name="02 - VCU Tests" Type="Basic" Visible="1"/>
