@@ -175,9 +175,9 @@ jobs:
         #  matlab-batch 
         #  -nodesktop 
         #  -logfile output.log "openProject(pwd);runprocess(Process = 'CIPipeline', Force = false, ExitInBatchMode = true, RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = false);" 
-          uses: matlab-actions/run-command@v2
-          with:
-            command: openProject(pwd);runprocess(Process = 'CIPipeline', Force = false, ExitInBatchMode = true, RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = false);
+        uses: matlab-actions/run-command@v2
+        with:
+          command: openProject(pwd);runprocess(Process = 'CIPipeline', Force = false, ExitInBatchMode = true, RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = false);
 
       - name:
           Upload Artifacts
@@ -304,9 +304,9 @@ jobs:
           # -logfile output.log "openProject(pwd);
           # rptObj=padv.ProcessAdvisorReportGenerator(Process = 'CIPipeline', Format='pdf', OutputPath=fullfile(currentProject().RootFolder,'ProcessAdvisorReport'));
           # rptObj.generateReport();" 
-          uses: matlab-actions/run-command@v2
-          with:
-            command: openProject(pwd);rptObj=padv.ProcessAdvisorReportGenerator(Process = 'CIPipeline', Format='pdf', OutputPath=fullfile(currentProject().RootFolder,'ProcessAdvisorReport'));rptObj.generateReport();
+        uses: matlab-actions/run-command@v2
+        with:
+          command: openProject(pwd);rptObj=padv.ProcessAdvisorReportGenerator(Process = 'CIPipeline', Format='pdf', OutputPath=fullfile(currentProject().RootFolder,'ProcessAdvisorReport'));rptObj.generateReport();
 
 
       - name:
