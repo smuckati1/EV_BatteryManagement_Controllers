@@ -20,8 +20,8 @@ function processmodel(pm)
     includeTestsPerTestCaseTask = true;
     includeMergeTestResultsTask = true;
     includeGenerateCodeTask = true;
-    includeAnalyzeModelCode = true && ~padv.internal.isMACA64 && exist('polyspaceroot','file');
-    includeProveCodeQuality = true && ~padv.internal.isMACA64 && (~isempty(ver('pscodeprover')) || ~isempty(ver('pscodeproverserver')));
+    includeAnalyzeModelCode = true && exist('polyspaceroot','file');
+    includeProveCodeQuality = true && (~isempty(ver('pscodeprover')) || ~isempty(ver('pscodeproverserver')));
     includeCodeInspection = false;
     includeGenerateRequirementsReport = false;
 
