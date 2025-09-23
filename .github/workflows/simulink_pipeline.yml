@@ -106,9 +106,9 @@ jobs:
 
     runs-on:
       ubuntu-latest
-      environment: myMATLABenv # This links the job to the environment
-      env:
-        MLM_LICENSE_TOKEN: ${{ secrets.MLM_LICENSE_TOKEN }}  # Uses environment secret
+    environment: myMATLABenv
+    env:
+      MLM_LICENSE_TOKEN: ${{ secrets.MLM_LICENSE_TOKEN }}  # Uses environment secret
 
     steps:
       - name:
@@ -223,9 +223,9 @@ jobs:
 
     runs-on:
       ubuntu-latest
-      environment: myMATLABenv # This links the job to the environment
-      env:
-        MLM_LICENSE_TOKEN: ${{ secrets.MLM_LICENSE_TOKEN }}  # Uses environment secret
+    environment: myMATLABenv
+    env:
+      MLM_LICENSE_TOKEN: ${{ secrets.MLM_LICENSE_TOKEN }}  # Uses environment secret
 
     steps:
       - name:
