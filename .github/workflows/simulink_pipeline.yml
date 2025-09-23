@@ -1,8 +1,11 @@
 name:
-  simulink_pipeline
+  MBD Pipeline
 
 on:
-  workflow_dispatch:
+  # workflow_dispatch:
+  # Triggers the workflow on push events but only for the main branch
+  push:
+    branches: [ main ]
 
 permissions:
   checks:
@@ -103,6 +106,9 @@ jobs:
 
     runs-on:
       ubuntu-latest
+      environment: myMATLABenv # This links the job to the environment
+      env:
+        MLM_LICENSE_TOKEN: ${{ secrets.MLM_LICENSE_TOKEN }}  # Uses environment secret
 
     steps:
       - name:
@@ -124,18 +130,54 @@ jobs:
 
       - name:
           Setup MATLAB
+        uses: matlab-actions/setup-matlab@v2
+        with:
+          products: >
+            Parallel_Computing_Toolbox
+            Simulink
+            Stateflow
+            MATLAB_Test
+            Simulink_Test
+            Simulink_Coverage
+            Simulink_Check
+            CI/CD_Automation_for_Simulink_Check
+            MATLAB_Coder
+            Simulink_Coder
+            Embedded_Coder
+            Simscape
+            Simscape_Electrical
+            MATLAB_Compiler
+            Simulink_Compiler
+            Simulink_Report_Generator
+            MATLAB_Report_Generator
+            AUTOSAR_Blockset
+            Powertrain_Blockset
+          cache: true
+          release: R2025b  
 
         run:
           echo "$PATH_TO_MATLAB" >> $GITHUB_PATH
 
+      - name: 
+          Start Display Server
+        
+        run: |
+         sudo apt-get install -y xvfb
+         Xvfb :99 &
+         export DISPLAY=:99
+         echo "DISPLAY=:99" >> $GITHUB_ENV
+
       - name:
           Launch MATLAB
 
-        run:
-          >
-          matlab-batch 
-          -nodesktop 
-          -logfile output.log "openProject(pwd);runprocess(Process = 'CIPipeline', Force = false, ExitInBatchMode = true, RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = false);" 
+        # run:
+        #  >
+        #  matlab-batch 
+        #  -nodesktop 
+        #  -logfile output.log "openProject(pwd);runprocess(Process = 'CIPipeline', Force = false, ExitInBatchMode = true, RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = false);" 
+          uses: matlab-actions/run-command@v2
+          with:
+            command: openProject(pwd);runprocess(Process = 'CIPipeline', Force = false, ExitInBatchMode = true, RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = false);
 
       - name:
           Upload Artifacts
@@ -181,6 +223,9 @@ jobs:
 
     runs-on:
       ubuntu-latest
+      environment: myMATLABenv # This links the job to the environment
+      env:
+        MLM_LICENSE_TOKEN: ${{ secrets.MLM_LICENSE_TOKEN }}  # Uses environment secret
 
     steps:
       - name:
@@ -213,20 +258,56 @@ jobs:
 
       - name:
           Setup MATLAB
+        uses: matlab-actions/setup-matlab@v2
+        with:
+          products: >
+            Parallel_Computing_Toolbox
+            Simulink
+            Stateflow
+            MATLAB_Test
+            Simulink_Test
+            Simulink_Coverage
+            Simulink_Check
+            CI/CD_Automation_for_Simulink_Check
+            MATLAB_Coder
+            Simulink_Coder
+            Embedded_Coder
+            Simscape
+            Simscape_Electrical
+            MATLAB_Compiler
+            Simulink_Compiler
+            Simulink_Report_Generator
+            MATLAB_Report_Generator
+            AUTOSAR_Blockset
+            Powertrain_Blockset
+          cache: true
+          release: R2025b  
 
         run:
           echo "$PATH_TO_MATLAB" >> $GITHUB_PATH
 
+      - name: 
+          Start Display Server
+        
+        run: |
+         sudo apt-get install -y xvfb
+         Xvfb :99 &
+         export DISPLAY=:99
+         echo "DISPLAY=:99" >> $GITHUB_ENV
+
       - name:
           Generate PADV Report
-
         run:
-          >
-          matlab-batch 
-          -nodesktop 
-          -logfile output.log "openProject(pwd);
-          rptObj=padv.ProcessAdvisorReportGenerator(Process = 'CIPipeline', Format='pdf', OutputPath=fullfile(currentProject().RootFolder,'ProcessAdvisorReport'));
-          rptObj.generateReport();" 
+          # >
+          # matlab-batch 
+          # -nodesktop 
+          # -logfile output.log "openProject(pwd);
+          # rptObj=padv.ProcessAdvisorReportGenerator(Process = 'CIPipeline', Format='pdf', OutputPath=fullfile(currentProject().RootFolder,'ProcessAdvisorReport'));
+          # rptObj.generateReport();" 
+          uses: matlab-actions/run-command@v2
+          with:
+            command: openProject(pwd);rptObj=padv.ProcessAdvisorReportGenerator(Process = 'CIPipeline', Format='pdf', OutputPath=fullfile(currentProject().RootFolder,'ProcessAdvisorReport'));rptObj.generateReport();
+
 
       - name:
           Upload Artifacts
