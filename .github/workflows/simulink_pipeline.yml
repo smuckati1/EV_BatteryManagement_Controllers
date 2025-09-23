@@ -155,9 +155,6 @@ jobs:
           cache: true
           release: R2025b  
 
-        run:
-          echo "$PATH_TO_MATLAB" >> $GITHUB_PATH
-
       - name: 
           Start Display Server
         
@@ -282,9 +279,6 @@ jobs:
             Powertrain_Blockset
           cache: true
           release: R2025b  
-
-        run:
-          echo "$PATH_TO_MATLAB" >> $GITHUB_PATH
 
       - name: 
           Start Display Server
