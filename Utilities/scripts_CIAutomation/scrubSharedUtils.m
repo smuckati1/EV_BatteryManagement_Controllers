@@ -9,3 +9,7 @@ function scrubSharedUtils()
     if isfolder(fldrname)
         rmdir(fldrname,'s')
     end 
+    fldrname = fullfile(prj.SimulinkCodeGenFolder,'slprj','autosar','_sharedutils');
+    if isfolder(fldrname)
+        rmdir(fldrname,'s')
+    end 

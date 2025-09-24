@@ -102,7 +102,7 @@ jobs:
       ${{ !cancelled() }}
 
     needs:
-      Restore_Cache
+      MISRA_C_2012_Checks
 
     runs-on:
       ubuntu-latest
@@ -126,6 +126,16 @@ jobs:
         with:
           name:
             01_Restore_Cache_padv_artifacts
+
+      - name:
+          Download Artifacts
+        continue-on-error: true
+        uses:
+          actions/download-artifact@v4
+
+        with:
+          name:
+            02_Runprocess_ModelChecks_padv_artifacts
 
 
       - name:
@@ -189,7 +199,7 @@ jobs:
 
         with:
           name:
-            02_Runprocess_GenWebView_padv_artifacts
+            03_Runprocess_GenWebView_padv_artifacts
 
           path:
             |
@@ -216,7 +226,7 @@ jobs:
       ${{ !cancelled() }}
 
     needs:
-      Generate_Webview
+      Restore_Cache
 
     runs-on:
       ubuntu-latest
@@ -240,17 +250,6 @@ jobs:
         with:
           name:
             01_Restore_Cache_padv_artifacts
-
-      - name:
-          Download Artifacts
-        continue-on-error: true
-
-        uses:
-          actions/download-artifact@v4
-
-        with:
-          name:
-            02_Runprocess_GenWebView_padv_artifacts
 
       - name:
           Setup MATLAB
@@ -313,7 +312,7 @@ jobs:
 
         with:
           name:
-            03_Runprocess_ModelChecks_padv_artifacts
+            02_Runprocess_ModelChecks_padv_artifacts
 
           path:
             |
@@ -373,18 +372,7 @@ jobs:
 
         with:
           name:
-            02_Runprocess_GenWebView_padv_artifacts
-
-      - name:
-          Download Artifacts
-        continue-on-error: true
-
-        uses:
-          actions/download-artifact@v4
-
-        with:
-          name:
-            03_Runprocess_ModelChecks_padv_artifacts
+            02_Runprocess_ModelChecks_padv_artifacts
 
       - name:
           Setup MATLAB
@@ -507,18 +495,7 @@ jobs:
 
         with:
           name:
-            02_Runprocess_GenWebView_padv_artifacts
-
-      - name:
-          Download Artifacts
-        continue-on-error: true
-
-        uses:
-          actions/download-artifact@v4
-
-        with:
-          name:
-            03_Runprocess_ModelChecks_padv_artifacts
+            02_Runprocess_ModelChecks_padv_artifacts
 
       - name:
           Setup MATLAB
@@ -557,6 +534,12 @@ jobs:
          export DISPLAY=:99
          echo "DISPLAY=:99" >> $GITHUB_ENV
 
+      - name:
+          Removed Share Utillities before any SiL Tests
+        uses: matlab-actions/run-command@v2
+        with:
+          command: openProject(pwd); scrubSharedUtils;
+         
       - name:
           Execute MiL and SiL Tests
 
@@ -641,7 +624,7 @@ jobs:
 
         with:
           name:
-            02_Runprocess_GenWebView_padv_artifacts
+            03_Runprocess_GenWebView_padv_artifacts
 
       - name:
           Download Artifacts
@@ -652,7 +635,7 @@ jobs:
 
         with:
           name:
-            03_Runprocess_ModelChecks_padv_artifacts
+            02_Runprocess_ModelChecks_padv_artifacts
 
       - name:
           Download Artifacts
@@ -712,6 +695,13 @@ jobs:
          Xvfb :99 &
          export DISPLAY=:99
          echo "DISPLAY=:99" >> $GITHUB_ENV
+
+      - name:
+          Removed Share Utillities before Code Generation
+        uses: matlab-actions/run-command@v2
+        with:
+          command: openProject(pwd); scrubSharedUtils;
+
 
       - name:
           Generate C Code for Models
@@ -798,7 +788,7 @@ jobs:
 
         with:
           name:
-            02_Runprocess_GenWebView_padv_artifacts
+            03_Runprocess_GenWebView_padv_artifacts
 
       - name:
           Download Artifacts
@@ -809,7 +799,7 @@ jobs:
 
         with:
           name:
-            03_Runprocess_ModelChecks_padv_artifacts
+            02_Runprocess_ModelChecks_padv_artifacts
 
       - name:
           Download Artifacts
@@ -951,7 +941,7 @@ jobs:
 
         with:
           name:
-            02_Runprocess_GenWebView_padv_artifacts
+            03_Runprocess_GenWebView_padv_artifacts
 
       - name:
           Download Artifacts
@@ -962,7 +952,7 @@ jobs:
 
         with:
           name:
-            03_Runprocess_ModelChecks_padv_artifacts
+            02_Runprocess_ModelChecks_padv_artifacts
 
       - name:
           Download Artifacts

@@ -225,9 +225,9 @@ function processmodel(pm)
     if includeModelStandardsTask && includeModelMaintainabilityMetricTask
         maTask.runsAfter(mmMetricTask);
     end
-    if includeModelStandardsTask && includeSimulinkWebViewTask
-        maTask.runsAfter(slwebTask);
-    end
+    % if includeModelStandardsTask && includeSimulinkWebViewTask
+    %     maTask.runsAfter(slwebTask);
+    % end
     if includeModelStandardsTask && includeFindClones
         acrossModelCloneDetectTask.runsAfter(maTask);
         libCloneDetectTask.runsAfter(maTask);
