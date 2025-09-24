@@ -721,7 +721,7 @@ jobs:
         uses: matlab-actions/run-command@v2
         with:
           # command: openProject(pwd);runprocess(Process = 'CIPipeline', Force = false, ExitInBatchMode = true, RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = true);
-          command: openProject(pwd);runprocess(Process = 'CIPipeline', Tasks = "padv.builtin.task.GenerateCode", Force = false, ExitInBatchMode = true, RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = false);
+          command: openProject(pwd);runprocess(Process = 'CIPipeline', Tasks = "padv.builtin.task.GenerateCode", Force = true, ExitInBatchMode = true, RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = false);
 
       - name:
           Upload Artifacts
