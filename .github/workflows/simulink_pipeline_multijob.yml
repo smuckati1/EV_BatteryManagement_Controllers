@@ -553,13 +553,6 @@ jobs:
           # command: openProject(pwd);runprocess(Process = 'CIPipeline', Force = false, ExitInBatchMode = true, RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = true);
           command: openProject(pwd);runprocess(Process = 'CIPipeline', Tasks = ["padv.builtin.task.RunTestsPerTestCase","padv.builtin.task.MergeTestResults"], Force = false, ExitInBatchMode = true, RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = false);
 
-      - name: Summarize Test Results in Job
-        uses: test-summary/action@v2
-        with:
-          paths: |
-            PA_Results/test_results/*_JUnit.xml
-        if: always()
-
       - name:
           Upload Artifacts
 
