@@ -703,11 +703,11 @@ jobs:
          export DISPLAY=:99
          echo "DISPLAY=:99" >> $GITHUB_ENV
 
-      - name:
-          Removed Share Utillities before Code Generation
-        uses: matlab-actions/run-command@v2
-        with:
-          command: openProject(pwd); scrubSharedUtils;
+      #- name:
+      #    Removed Share Utillities before Code Generation
+      #  uses: matlab-actions/run-command@v2
+      #  with:
+      #    command: openProject(pwd); scrubSharedUtils;
 
 
       - name:
