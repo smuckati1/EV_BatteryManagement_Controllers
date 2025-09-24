@@ -473,7 +473,7 @@ jobs:
       ${{ !cancelled() }}
 
     needs:
-      Model_Compare_Reports
+      MISRA_C_2012_Checks
 
     runs-on:
       ubuntu-latest
@@ -519,17 +519,6 @@ jobs:
         with:
           name:
             03_Runprocess_ModelChecks_padv_artifacts
-
-      - name:
-          Download Artifacts
-        continue-on-error: true
-
-        uses:
-          actions/download-artifact@v4
-
-        with:
-          name:
-            04_Runprocess_CompareReports_padv_artifacts
 
       - name:
           Setup MATLAB
