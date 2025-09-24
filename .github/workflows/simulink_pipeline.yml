@@ -146,6 +146,7 @@ jobs:
             Embedded_Coder
             Simscape
             Simscape_Electrical
+            Simscape_Battery
             MATLAB_Compiler
             Simulink_Compiler
             Simulink_Report_Generator
@@ -233,7 +234,7 @@ jobs:
 
       - name:
           Download Artifacts
-
+        continue-on-error: true
         uses:
           actions/download-artifact@v4
 
@@ -271,6 +272,7 @@ jobs:
             Embedded_Coder
             Simscape
             Simscape_Electrical
+            Simscape_Battery
             MATLAB_Compiler
             Simulink_Compiler
             Simulink_Report_Generator
