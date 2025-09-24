@@ -53,6 +53,13 @@ function processmodel(pm)
         mmMetricTask = pm.addTask(padv.builtin.task.CollectMetrics());
     end
 
+    %% Generate Model Comparison
+    if includeModelComparisonTask
+        mdlCompTask = pm.addTask(padv.builtin.task.GenerateModelComparison(IterationQuery=findModels));
+        mdlCompTask.ReportPath = fullfile( ...
+            defaultResultPath,'model_comparison');
+    end
+    
     %% Check modeling standards
     % Tools required: Model Advisor
     if includeModelStandardsTask
@@ -102,13 +109,6 @@ function processmodel(pm)
         libCloneDetectTask.ReportPath = fullfile(defaultResultPath,'findLibraryClones');
         libCloneDetectTask.LibraryReportName = "$ITERATIONARTIFACT$_LibraryClonesReport";
         libCloneDetectTask.DetectClonesAcrossModel = false;
-    end
-
-    %% Generate Model Comparison
-    if includeModelComparisonTask
-        mdlCompTask = pm.addTask(padv.builtin.task.GenerateModelComparison(IterationQuery=findModels));
-        mdlCompTask.ReportPath = fullfile( ...
-            defaultResultPath,'model_comparison');
     end
 
     %% Generate SDD report (System Design Description)
