@@ -2,48 +2,51 @@
 
 *Using automotive controllers as an example, let's learn how to setup CI pipelines and how it will benefit your team*
 
+## Why Continuous Integration?
+- Frequent integration: Developers regularly merge code changes into a shared repository
+- Automated testing: Each merge triggers an automated build and test process
+- Early error detection: CI identifies issues early, keeping the codebase stable and release-ready
+![Continuous Integration Workflow](Images/Workflow_with_CI.png)
+
 When multiple engineers are involved in making algorthms, we need to ensure the changes being made are coordinated and thoroughly tested. Automating this work saves you a lot of time while preserving the quality of your code. 
 
-In this example, we assume we are a team working to release a new "Sport+" mode for their cars. Different engineers are making changes to the Vehicle Control Unit (VCU) and the Battery Management System (BMS) models. Whem the new updates are commited, this demo shows how to autoamte the testing, reporting and code generation tasks (Using GitLab CICD), so that we can successfully integrate and release the tested controller code.
-
-![Demo Overview](Images/SDV SportPlus Mode Overview.png)
--------------   
-![Running Tests and Codegen in an Automated Fashion](Images/AutomatedCITasks.png)
--------------   
-
 ## Demo Overview
-With this demo, we highlight how to complete code generation, testing, checks and others tasks in an automated fashion using UI. But more than that, we showcase how multiple teams/team members working on different branches can potentially work together, and leverage CI to collaborate and build software.
+In this example, we assume we are a team working to release a new "Launch Mode" for their electric cars. 
+![Continuous Integration Workflow](Images/LaunchMode_UpdateBMS.png)
+Update the Battery Management System (BMS) to increase the Max Discharge Current by 70%.
 
-### What's the customer's workflow look like once the CI pipelins are in place?
-1. Clone the project locally
-2. Switch to using up a development branch (bBattMgmt or bVCU)
-3. Merge the main branch to their development branch. This way you have access to the latest work from all your colleagues.
-4. Make changes to models and/or tests. Commit these changes and push them.
-5. Confirm you can see the changes made are reflected in GitLab
-6. Confirm you can see the changes made trigger and run a CI pipeline of 3 activities for the development branch.
-7. Submit a merge request to merge the development changes to the main branch
-8. Once the merge request is approved, confirm a CI pipeline of 5 activities get's run on the main branch.
+### What the MBD developer would do? 
+![Continuous Integration - Developer Workflow](Images/CI_MBD_Developer_Actions.png)
+### What the automated pipeline will execute?
+![Continuous Integration - Automation Server Pipeline](Images/CI_MBD_CIPlatform_Actions.png)
+--
+
+## Key Features Showcased in this Demo
+1. MATLAB Projects enable you to manage your environment and use source control
+2. Process Advisor makes it easy to setup your CI pipeline, leveraging prebuilt tasks and a template process definition
+3. Process Advisor enables you to auto generate YAML files for popular CI platforms (such as GitHub Actions), making it easy to adopt CI
+4. The matlab-batch token enables you to license and execute multple jobs simulatenaously on different environemtns.
+5. MATLAB can be containerized and executed on the automation environment of your choice.
 
 ## Relevant Apps/Workflows
 - Use Continuous Integration (CI) to automate checks, tests and codeGen
+- Running CI workflows within a docker container on the Cloud
+- Use of the CI/CD support package for Simulink
 - Using Projects and Source Control to manage your files/folders
 - MISRA C Checks using Simulink Check
 - MiL Testing with Simulink Test
 - AUTOSAR - Generate Classic AUTOSAR compliant C code for BMS
 - AUTOSAR - Generate Adaptive AUTOSAR compliant CPP code for VCU
-- (coming soon) - Running CI workflows within a docker container on the Cloud (Contact smuckati@mathworks.com for more details)
+
 
 ## Relevant Products
 Simulink, Stateflow, System Composer, Simulink Test, Embedded Coder, AUTOSAR Blockset, Simulink Check
 
-## Special Instructions
-Please refer to the presentation : [Demo Instructions](Internal/Continuous Integration for MBD Controllers.pptx).
-
 ## Recording
-Demo overview and how to run it: [Microsoft Stream](https://mathworks.sharepoint.com/:v:/r/sites/aeg/Shared%20Documents/Stream%20Migrated%20Videos/AE%20Content%20Recordings/SDV_CI_Part.mp4?csf=1&web=1&e=JCzIpX&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
+Join the live session at [MATLAB Expo 2025](https://www.matlabexpo.com/online/2025.html)
 
 ## Contact
-Sameer K Muckatira
+Sameer K Muckatira, Jason Ghidella
 
 ## Relevant Industries
 * MBD adopter who are looking to use Continuous Integration, and starting on DevOps

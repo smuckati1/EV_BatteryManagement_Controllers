@@ -624,29 +624,7 @@ jobs:
 
         with:
           name:
-            03_Runprocess_GenWebView_padv_artifacts
-
-      - name:
-          Download Artifacts
-        continue-on-error: true
-
-        uses:
-          actions/download-artifact@v4
-
-        with:
-          name:
             02_Runprocess_ModelChecks_padv_artifacts
-
-      - name:
-          Download Artifacts
-        continue-on-error: true
-
-        uses:
-          actions/download-artifact@v4
-
-        with:
-          name:
-            04_Runprocess_CompareReports_padv_artifacts
 
       - name:
           Download Artifacts
