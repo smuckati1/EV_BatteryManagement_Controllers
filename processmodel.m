@@ -20,8 +20,8 @@ function processmodel(pm)
     includeTestsPerTestCaseTask = true;
     includeMergeTestResultsTask = true;
     includeGenerateCodeTask = true;
-    includeAnalyzeModelCode = true && exist('polyspaceroot','file');
-    includeProveCodeQuality = true && (~isempty(ver('pscodeprover')) || ~isempty(ver('pscodeproverserver')));
+    includeAnalyzeModelCode = false && exist('polyspaceroot','file');
+    includeProveCodeQuality = false && (~isempty(ver('pscodeprover')) || ~isempty(ver('pscodeproverserver')));
     includeCodeInspection = false;
     includeGenerateRequirementsReport = false;
 
@@ -46,20 +46,15 @@ function processmodel(pm)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %% Register Tasks
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    %% Collect Model Maintainability Metrics
-    % Tools required: Simulink Check
-    if includeModelMaintainabilityMetricTask
-        mmMetricTask = pm.addTask(padv.builtin.task.CollectMetrics());
-    end
-
-    %% Generate Model Comparison
-    if includeModelComparisonTask
-        mdlCompTask = pm.addTask(padv.builtin.task.GenerateModelComparison(IterationQuery=findModels));
-        mdlCompTask.ReportPath = fullfile( ...
-            defaultResultPath,'model_comparison');
-    end
     
+    %% Generate Simulink web view
+    % Tools required: Simulink Report Generator
+    if includeSimulinkWebViewTask
+        slwebTask = pm.addTask(padv.builtin.task.GenerateSimulinkWebView(IterationQuery=findModels));
+        slwebTask.ReportPath = fullfile(defaultResultPath,'webview');
+        slwebTask.ReportName = '$ITERATIONARTIFACT$_webview';
+    end
+
     %% Check modeling standards
     % Tools required: Model Advisor
     if includeModelStandardsTask
@@ -94,6 +89,12 @@ function processmodel(pm)
             defaultResultPath, 'design_error_detections','$ITERATIONARTIFACT$_DED');
     end
 
+    %% Collect Model Maintainability Metrics
+    % Tools required: Simulink Check
+    if includeModelMaintainabilityMetricTask
+        mmMetricTask = pm.addTask(padv.builtin.task.CollectMetrics());
+    end
+
     %% Generate clone detection reports
     % Tools required: Clone Detector
     if includeFindClones
@@ -120,12 +121,11 @@ function processmodel(pm)
         sddTask.ReportName = '$ITERATIONARTIFACT$_SDD';
     end
 
-    %% Generate Simulink web view
-    % Tools required: Simulink Report Generator
-    if includeSimulinkWebViewTask
-        slwebTask = pm.addTask(padv.builtin.task.GenerateSimulinkWebView(IterationQuery=findModels));
-        slwebTask.ReportPath = fullfile(defaultResultPath,'webview');
-        slwebTask.ReportName = '$ITERATIONARTIFACT$_webview';
+    %% Generate Model Comparison
+    if includeModelComparisonTask
+        mdlCompTask = pm.addTask(padv.builtin.task.GenerateModelComparison(IterationQuery=findModels));
+        mdlCompTask.ReportPath = fullfile( ...
+            defaultResultPath,'model_comparison');
     end
 
     %% Run tests per test case
@@ -216,6 +216,9 @@ function processmodel(pm)
     end
 
     %% Set Task Run-Order
+    if includeTestsPerTestCaseTask && includeModelStandardsTask
+        milTask.runsAfter(maTask);
+    end
     if includeMergeTestResultsTask && includeModelTestingMetricTask
         mtMetricTask.runsAfter(mergeTestTask);
     end
@@ -240,9 +243,6 @@ function processmodel(pm)
     end
     if includeSDDTask && includeModelStandardsTask
         sddTask.runsAfter(maTask);
-    end
-    if includeTestsPerTestCaseTask && includeModelStandardsTask
-        milTask.runsAfter(maTask);
     end
     if includeGenerateCodeTask && includeAnalyzeModelCode && includeProveCodeQuality
         pscpTask.runsAfter(psbfTask);
