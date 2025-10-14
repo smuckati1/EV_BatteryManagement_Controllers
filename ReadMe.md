@@ -1,3 +1,7 @@
+| **Branch - main** | **Branch - bFeature** |
+|:---------------------------|:-----------------:|
+|[![MBD Pipeline](https://github.com/smuckati1/EV_BatteryManagement_Controllers/actions/workflows/simulink_pipeline_multijob.yml/badge.svg?branch=main)](https://github.com/smuckati1/EV_BatteryManagement_Controllers/actions/workflows/simulink_pipeline_multijob.yml)|[![MBD Pipeline](https://github.com/smuckati1/EV_BatteryManagement_Controllers/actions/workflows/simulink_pipeline_multijob.yml/badge.svg?branch=Feature)](https://github.com/smuckati1/EV_BatteryManagement_Controllers/actions/workflows/simulink_pipeline_multijob.yml)|
+
 # Continuous Integration (CI) for MBD - Automate Model Testing and and Generate AUTOSAR Compliant Code
 
 *Using automotive controllers as an example, let's learn how to setup CI pipelines and how it will benefit your team*
