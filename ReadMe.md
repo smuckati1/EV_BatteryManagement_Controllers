@@ -34,8 +34,8 @@ Update the Battery Management System (BMS) to increase the Max Discharge Current
 
 ## Relevant Apps/Workflows
 - Use Continuous Integration (CI) to automate checks, tests and codeGen
-- Running CI workflows within a docker container on the Cloud
-- Use of the CI/CD support package for Simulink
+- Executing CI workflows with containerized MATLAB as your runner
+- Use of the CI/CD support package for Simulink (i.e. Process Advisor)
 - Using Projects and Source Control to manage your files/folders
 - MISRA C Checks using Simulink Check
 - MiL Testing with Simulink Test
@@ -47,7 +47,7 @@ Update the Battery Management System (BMS) to increase the Max Discharge Current
 Simulink, Stateflow, System Composer, Simulink Test, Embedded Coder, AUTOSAR Blockset, Simulink Check
 
 ## Recording
-Join the live session at [MATLAB Expo 2025](https://www.matlabexpo.com/online/2025.html)
+[MATLAB EXPO 2025 - CI for Simulink](https://www.mathworks.com/videos/ci-for-simulink-speed-up-model-based-design-with-automated-pipelines-1762247698554.html)
 
 ## Contact
 Sameer K Muckatira, Jason Ghidella
